@@ -17,7 +17,17 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
+import { Switch, Route } from 'react-router-dom';
+import {  Redirect } from 'react-router'
+
 import Leftmenu from './leftmenu.js'
+import OpenCase from './opencase.js'
+import Visit from './visitlist.js'
+import Menu from './menu.js'
+
+import logo from './fav.ico'
+
+
 
 const drawerWidth = 240;
 
@@ -65,7 +75,7 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <img src="fav.ico"  height="100" width="100"></img>
+      <img src={logo}  height="75" width="75"></img>
       <div className={classes.toolbar} />
       
 
@@ -77,6 +87,7 @@ function ResponsiveDrawer(props) {
 
   return (
     <div className={classes.root}>
+
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
@@ -90,8 +101,9 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <div>aa</div>
-          <div>adda</div>
+          
+          <Menu/>
+
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -127,7 +139,15 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-           comopnent
+
+        <Switch>
+          
+          <Route exact path='/dashboard/case' component={OpenCase}/>
+          <Route exact path='/dashboard/visit' component={Visit}/>
+
+        </Switch>
+
+
       </main>
     </div>
   );

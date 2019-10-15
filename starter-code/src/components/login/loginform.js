@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import Edit from '../myedit.js'
 
-
-
+import AuthService from '../auth/auth-service.js';
+import {  Redirect } from 'react-router'
 
 class LoginForm extends Component {
 
@@ -13,25 +13,38 @@ class LoginForm extends Component {
           userName: '', 
           password: ''
           };
+          this.service = new AuthService();
       }
 
+      /* better way
+      handleChange = (event) => {  
+        const {name, value} = event.target;
+        this.setState({[name]: value});
+      }
+      */
 
        handleChange = (value,field) => {
-           alert(field);
-           alert(value+ ' pare');
            this.setState(
-            {[field]:value},
-            ()=> alert(JSON.stringify(this.state))
+            {[field]:value}
+           //,()=> alert(JSON.stringify(this.state))
             );
       }
 
-
-handleFormSubmit = (event) => {
-    event.preventDefault();   
-    console.log(this.state)
-
-    this.props.addAFoodItem(this.state)
-  }
+      handleFormSubmit = (event) => {
+       
+        event.preventDefault();
+        const username = this.state.username;// make sure the case matches the field
+        const password = this.state.password;
+        
+        this.service.login(username, password)
+        .then( response => {
+        
+           this.setState({ username: "", password: "" });
+           this.props.history.push("/dashboard");
+          //this.props.getUser(response)
+        })
+        .catch( error => {alert(error);console.log(error) })
+      }
 
 
   render() {
@@ -54,23 +67,23 @@ handleFormSubmit = (event) => {
 
   <form onSubmit = {this.handleFormSubmit}>
 
-  <div class="flex-container2">
-      <div>
-      </div>
+  <div className="flex-container2">
+      <div></div>
      <div>
      <br></br>
      
      <h4>LOGIN TO YOUR ACCOUNT</h4>
      </div>
      <div>
-     <Edit field="userName" handleChange={this.handleChange}/>         
+     <Edit field="username" handleChange={this.handleChange}/>         
      </div>
      <div>
      <Edit field="password"  handleChange={this.handleChange}/>
      </div>  
 
      <div>
-     <a href="/dashboard" className="btn btn-primary ancho240" role="button">LOGIN</a>
+     
+     <button width="100%" type="submit"  className="btn btn-primary btn-lg">LOGIN</button>
      </div>  
 
      <div>

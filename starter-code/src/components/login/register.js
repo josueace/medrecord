@@ -2,32 +2,51 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import Edit from '../myedit.js'
 
-class LoginForm extends Component {
+import AuthService from '../auth/auth-service.js';
+
+class RegisterForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
           userName: '', 
+          email:'',
           password: ''
           };
+          this.service = new AuthService();
+
       }
 
 
        handleChange = (value,field) => {
-           alert(field);
-           alert(value+ ' pare');
            this.setState(
-            {[field]:value},
-            ()=> alert(JSON.stringify(this.state))
+            {[field]:value}
+           // ,()=> alert(JSON.stringify(this.state))
             );
       }
 
 
 handleFormSubmit = (event) => {
-    event.preventDefault();   
-    console.log(this.state)
+     
+    
+    event.preventDefault();
+  const username = this.state.username;
+  const email = this.state.email;
+    const password = this.state.password;
 
-    this.props.addAFoodItem(this.state)
+  this.service.signup(username, email,password)///make sure case match with field in html
+  .then( response => {
+      this.setState({
+          username: "", 
+          password: "",
+      });
+
+
+      // this.props.getUser(response)
+  })
+  .catch( error =>{alert(error); console.log(error)} )
+      
+    
   }
 
 
@@ -51,16 +70,14 @@ handleFormSubmit = (event) => {
 
   <form onSubmit = {this.handleFormSubmit}>
 
-  <div class="flex-container2">
-      <div>
-      </div>
+      <div className="flex-container2">
+     <div></div>
      <div>
-    
-     
-     <h4>CREATE ACCOUNT</h4>
+     <br></br>
+     <h4 className="black" >CREATE ACCOUNT</h4>
      </div>
      <div>
-     <Edit field="userName" handleChange={this.handleChange}/>         
+     <Edit field="username" handleChange={this.handleChange}/>         
      </div>
      <div>
      <Edit field="email"  handleChange={this.handleChange}/>
@@ -75,11 +92,11 @@ handleFormSubmit = (event) => {
      </div>  
 
      <div>
-     <button width="100%" type="button" class="btn btn-primary btn-lg">Register</button>
+     <button width="100%" type="button" onClick={this.handleFormSubmit} className="btn btn-primary btn-lg">Register</button>
      </div>  
 
      <div>
-     <h5>Already have an account?</h5>
+     <h5 className="black">Already have an account?</h5>
      </div>  
      
       <div>
@@ -100,8 +117,8 @@ handleFormSubmit = (event) => {
   }
 }
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   show: PropTypes.bool,
 };
 
-export default LoginForm;
+export default RegisterForm;

@@ -8,11 +8,19 @@ import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+import Collapse from '@material-ui/core/Collapse';
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
   },
 }));
 
@@ -22,6 +30,12 @@ export default function SelectedListItem() {
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+  };
+
+  const [open, setOpen] = React.useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
   };
 
   return (
@@ -70,6 +84,39 @@ export default function SelectedListItem() {
           </ListItemIcon>
           <ListItemText primary="Diagnosis" />
         </ListItem>
+
+        <ListItem button onClick={handleClick}>
+
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primary="Inbox" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}
+           selected={selectedIndex === 4}
+           onClick={event => handleListItemClick(event, 4)}
+           >
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="config" />
+          </ListItem>
+          <ListItem button className={classes.nested}
+           selected={selectedIndex === 5}
+           onClick={event => handleListItemClick(event, 5)}
+         >
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="table" />
+          </ListItem>
+
+        </List>
+      </Collapse>
+        
       </List>
 
       
