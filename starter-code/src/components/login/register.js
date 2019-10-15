@@ -40,7 +40,7 @@ handleFormSubmit = (event) => {
           username: "", 
           password: "",
       });
-
+      this.props.history.push("/");
 
       // this.props.getUser(response)
   })

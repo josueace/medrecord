@@ -13,9 +13,13 @@ class AuthService {
 
 
   signup = (username,email, password) => {
-      alert(username+ 'em: '+email+'  pass '+password);
+      
     return this.service.post('/signup', {username,email, password})
-    .then(response => response.data)
+    .then(response =>
+        
+        response.data
+        
+        )
   }
 
   login = (username, password) => {
