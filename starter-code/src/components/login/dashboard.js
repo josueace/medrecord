@@ -67,7 +67,7 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
- alert('render dashprops '+JSON.stringify(props));
+ 
 
   const drawer = (
     <div>
@@ -76,7 +76,7 @@ function ResponsiveDrawer(props) {
       
       
       <Divider />
-      <Leftmenu/>
+      <Leftmenu {...props}/>
      
     </div>
   );
@@ -86,7 +86,7 @@ function ResponsiveDrawer(props) {
 
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar >
 
           <IconButton
             color="inherit"

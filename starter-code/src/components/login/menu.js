@@ -51,10 +51,10 @@ export default function CustomizedMenus(props) {//magic just putting props at ti
 
   let service = new AuthService();
   const handleClick2 = event => {
-      alert('vefor logout');
+     
     service.logout()
         .then( response => {
-            alert('logout logout');
+           
            props.history.push("/login");//check props here to see if it has function getuser
         })
         .catch( error => {alert(error);console.log(error) })

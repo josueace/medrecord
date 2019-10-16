@@ -24,12 +24,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SelectedListItem() {
+const options=['/dashboard/case','/dashboard/visit','/dashboard/case','/dashboard/case','/dashboard/case'];
+
+export default function SelectedListItem(props) {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleListItemClick = (event, index) => {
+      alert(index);
     setSelectedIndex(index);
+    alert(JSON.stringify(props));
+    
+    props.history.push(options[index]);
   };
 
   const [open, setOpen] = React.useState(true);
@@ -49,7 +55,7 @@ export default function SelectedListItem() {
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="Hospital" />
+          <ListItemText primary="New Visit" />
         </ListItem>
         <ListItem
           button
@@ -59,7 +65,7 @@ export default function SelectedListItem() {
           <ListItemIcon>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText primary="Doctors" />
+          <ListItemText primary="Visits" />
         </ListItem>
       </List>
       <Divider />
@@ -72,7 +78,7 @@ export default function SelectedListItem() {
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="Visits" />
+          <ListItemText primary="Diagnosis" />
         </ListItem>
         <ListItem
           button
@@ -82,7 +88,7 @@ export default function SelectedListItem() {
           <ListItemIcon>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText primary="Diagnosis" />
+          <ListItemText primary="Pending Visits" />
         </ListItem>
 
         <ListItem button onClick={handleClick}>
@@ -90,7 +96,7 @@ export default function SelectedListItem() {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary="Reference" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -102,7 +108,7 @@ export default function SelectedListItem() {
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="config" />
+            <ListItemText primary="Hospitals" />
           </ListItem>
           <ListItem button className={classes.nested}
            selected={selectedIndex === 5}
@@ -111,7 +117,7 @@ export default function SelectedListItem() {
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="table" />
+            <ListItemText primary="Doctors" />
           </ListItem>
 
         </List>

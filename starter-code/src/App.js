@@ -26,13 +26,13 @@ class App extends Component {
     if( this.state.loggedInUser === null ){
       this.service.loggedin()
       .then(response =>{
-        alert('fetch '+response.username);
+        
         this.setState({
           loggedInUser:  response.username
         }) 
       })
       .catch( err =>{
-        alert('fetchuser error ' +err);//callback hell here whenever you setstate it will call render
+     //  alert('fetchuser error ' +err);//callback hell here whenever you setstate it will call render
       //  this.setState({
         //  loggedInUser:  null
       //  }) 
@@ -42,7 +42,7 @@ class App extends Component {
   
   
   getTheUser= (userObj) => {
-    alert('who call tshi? '+userObj )
+  
     this.setState({
       loggedInUser: userObj
     })
@@ -55,17 +55,20 @@ class App extends Component {
  //  render={(props) => <Dashboard {...props}  coco="pera" getUser={this.getTheUser} />}
 
   render() {
-    alert('render app render app rener app');
+    
     this.fetchUser();
  
     if(this.state.loggedInUser!=null){
-       alert('userin');
+      
       return (
         <div className="App">
         <Switch>
           
            
-        <Route path='/login' component={LoginForm}/>
+          <Route
+            path='/login'
+              render={(props) => <LoginForm {...props}  coco="pera" getUser={this.getTheUser} />}
+           />
 
             <Route
               path='/dashboard'
@@ -77,21 +80,25 @@ class App extends Component {
               render={(props) => <Register {...props}  getUser={this.getTheUser} />}
              />
          
-            <Route path='/dashboard/case' component={Dashboard}/>
-            <Route path='/visit' component={Dashboard}/>
+             <Route
+              path='/'
+              render={(props) => <Dashboard {...props} coco="pera2" loggedInUser={this.state.loggedInUser} />}
+             />
+
+
+
           </Switch>
-  
          
         </div>
       );
         
     }
     else{
-      alert('user out ');
+     
     return (
       <div className="App">
       <Switch>
-          
+
           <Route
             path='/login'
               render={(props) => <LoginForm {...props}  coco="pera" getUser={this.getTheUser} />}
@@ -106,6 +113,11 @@ class App extends Component {
               path='/dashboard'
               render={(props) => <Dashboard {...props} coco="pera2" loggedInUser={this.state.loggedInUser} />}
              />
+
+           <Route
+            path='/'
+              render={(props) => <LoginForm {...props}  coco="pera" getUser={this.getTheUser} />}
+           />
 
           
         </Switch>

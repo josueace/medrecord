@@ -47,6 +47,9 @@ button{
 .black{
   color:black;
 }
+.backBlack{
+  background-color:black;
+}
 
 .fullWidth{
   width: 100%;
