@@ -26,42 +26,57 @@ class App extends Component {
     if( this.state.loggedInUser === null ){
       this.service.loggedin()
       .then(response =>{
+        alert('fetch '+response.username);
         this.setState({
-          loggedInUser:  response
+          loggedInUser:  response.username
         }) 
       })
       .catch( err =>{
-        this.setState({
-          loggedInUser:  false
-        }) 
+        alert('fetchuser error ' +err);//callback hell here whenever you setstate it will call render
+      //  this.setState({
+        //  loggedInUser:  null
+      //  }) 
       })
     }
   }
-
+  
+  
   getTheUser= (userObj) => {
-    console.log('user '+userObj);
-
+    alert('who call tshi? '+userObj )
     this.setState({
       loggedInUser: userObj
     })
   }
+  
 
+//https://tylermcginnis.com/react-router-pass-props-to-components/
+ // <Route exact path='/dashboard' component={Dashboard}/>    // no good to pass props
+
+ //  render={(props) => <Dashboard {...props}  coco="pera" getUser={this.getTheUser} />}
 
   render() {
+    alert('render app render app rener app');
     this.fetchUser();
-    
-    if(this.state.loggedInUser){
+ 
+    if(this.state.loggedInUser!=null){
+       alert('userin');
       return (
         <div className="App">
         <Switch>
-            <Route exact path='/' component={Dashboard}/>          
-            <Route path='/register' component={Register}/>
+          
            
-            <Route exact path="/logout" render={() => (
-              <Redirect  to="/" />// push??
-              )}/>
+        <Route path='/login' component={LoginForm}/>
 
-            <Route path='/dashboard' component={Dashboard}/>
+            <Route
+              path='/dashboard'
+              render={(props) => <Dashboard {...props} coco="pera2" loggedInUser={this.state.loggedInUser} />}
+             />
+
+             <Route
+              path='/register'
+              render={(props) => <Register {...props}  getUser={this.getTheUser} />}
+             />
+         
             <Route path='/dashboard/case' component={Dashboard}/>
             <Route path='/visit' component={Dashboard}/>
           </Switch>
@@ -71,21 +86,34 @@ class App extends Component {
       );
         
     }
-    else
+    else{
+      alert('user out ');
     return (
       <div className="App">
       <Switch>
-          <Route exact path='/' component={LoginForm}/>          
-          <Route path='/register' component={Register}/>
-          <Route path='/logout' component={LoginForm}/>
-          <Route path='/dashboard' component={Dashboard}/>
-          <Route path='/dashboard/case' component={Dashboard}/>
-          <Route path='/visit' component={Dashboard}/>
+          
+          <Route
+            path='/login'
+              render={(props) => <LoginForm {...props}  coco="pera" getUser={this.getTheUser} />}
+           />
+
+          <Route
+              path='/register'
+              render={(props) => <Register {...props}  getUser={this.getTheUser} />}
+             />
+          
+          <Route
+              path='/dashboard'
+              render={(props) => <Dashboard {...props} coco="pera2" loggedInUser={this.state.loggedInUser} />}
+             />
+
+          
         </Switch>
 
        
       </div>
-    );
+     );
+    }
   }
 }
 

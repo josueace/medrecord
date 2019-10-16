@@ -37,12 +37,11 @@ handleFormSubmit = (event) => {
   this.service.signup(username, email,password)///make sure case match with field in html
   .then( response => {
       this.setState({
-          username: "", 
+          username: response.username, 
           password: "",
       });
-      this.props.history.push("/");
-
-      // this.props.getUser(response)
+      this.props.getUser(response.username);
+      this.props.history.push("/dashboard");
   })
   .catch( error =>{alert(error); console.log(error)} )
       
@@ -71,9 +70,8 @@ handleFormSubmit = (event) => {
   <form onSubmit = {this.handleFormSubmit}>
 
       <div className="flex-container2">
-     <div></div>
      <div>
-     <br></br>
+     
      <h4 className="black" >CREATE ACCOUNT</h4>
      </div>
      <div>
@@ -100,7 +98,7 @@ handleFormSubmit = (event) => {
      </div>  
      
       <div>
-     <a  href="/">Login</a>
+     <a  href="/login">Login</a>
      </div>  
 
     </div>

@@ -42,35 +42,40 @@ const StyledMenuItem = withStyles(theme => ({
   },
 }))(MenuItem);
 
-export default function CustomizedMenus() {
+export default function CustomizedMenus(props) {//magic just putting props at time of export function component exposes props..nice
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
   let service = new AuthService();
   const handleClick2 = event => {
-     
-    service.logout();
+      alert('vefor logout');
+    service.logout()
+        .then( response => {
+            alert('logout logout');
+           props.history.push("/login");//check props here to see if it has function getuser
+        })
+        .catch( error => {alert(error);console.log(error) })
     
   };
-
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+ 
   return (
     <div>
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        color="primary"
+        color="warning"
         onClick={handleClick}
       >
-        My Account
+        {props.loggedInUser}
       </Button>
       <StyledMenu
         id="customized-menu"
@@ -86,14 +91,14 @@ export default function CustomizedMenus() {
           <ListItemText primary="My Profile" />
         </StyledMenuItem>
         
-        <a href="/logout">
+        
         <StyledMenuItem>
           <ListItemIcon>
             <InboxIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText onClick={handleClick2}primary="Logout" />
         </StyledMenuItem>
-        </a>
+       
       </StyledMenu>
     </div>
   );

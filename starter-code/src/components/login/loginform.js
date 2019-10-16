@@ -39,9 +39,12 @@ class LoginForm extends Component {
         this.service.login(username, password)
         .then( response => {
         
-           this.setState({ username: "", password: "" });
+           alert('llegologin '+JSON.stringify(response));
+           alert('props from loginform'+ JSON.stringify(this.props));
+           this.setState({ username: response.username, password: "" });// this will cause render
+           this.props.getUser(response.username);
            this.props.history.push("/dashboard");
-          //this.props.getUser(response)
+          
         })
         .catch( error => {alert(error);console.log(error) })
       }
