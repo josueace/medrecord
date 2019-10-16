@@ -24,16 +24,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const options=['/dashboard/case','/dashboard/visit','/dashboard/case','/dashboard/case','/dashboard/case'];
+const options=['/dashboard/visit','/dashboard/lab','/dashboard/visit','/dashboard/hospital','/dashboard/hospital','/dashboard/doctor'];
 
 export default function SelectedListItem(props) {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleListItemClick = (event, index) => {
-      alert(index);
+   
     setSelectedIndex(index);
-    alert(JSON.stringify(props));
     
     props.history.push(options[index]);
   };
@@ -55,8 +54,10 @@ export default function SelectedListItem(props) {
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="New Visit" />
+          <ListItemText primary="Visits" />
         </ListItem>
+
+
         <ListItem
           button
           selected={selectedIndex === 1}
@@ -65,11 +66,9 @@ export default function SelectedListItem(props) {
           <ListItemIcon>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText primary="Visits" />
+          <ListItemText primary="Labs" />
         </ListItem>
-      </List>
-      <Divider />
-      <List >
+
         <ListItem
           button
           selected={selectedIndex === 2}
@@ -80,27 +79,28 @@ export default function SelectedListItem(props) {
           </ListItemIcon>
           <ListItemText primary="Diagnosis" />
         </ListItem>
+
+      </List>
+      <Divider />
+      <List >
+    
         <ListItem
           button
           selected={selectedIndex === 3}
-          onClick={event => handleListItemClick(event, 3)}
+          onClick={handleClick}
         >
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Pending Visits" />
-        </ListItem>
-
-        <ListItem button onClick={handleClick}>
+         
 
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
         <ListItemText primary="Reference" />
         {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
+         </ListItem>
+
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+
           <ListItem button className={classes.nested}
            selected={selectedIndex === 4}
            onClick={event => handleListItemClick(event, 4)}
@@ -110,6 +110,7 @@ export default function SelectedListItem(props) {
             </ListItemIcon>
             <ListItemText primary="Hospitals" />
           </ListItem>
+
           <ListItem button className={classes.nested}
            selected={selectedIndex === 5}
            onClick={event => handleListItemClick(event, 5)}

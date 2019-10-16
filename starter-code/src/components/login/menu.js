@@ -75,7 +75,7 @@ export default function CustomizedMenus(props) {//magic just putting props at ti
         color="warning"
         onClick={handleClick}
       >
-        {props.loggedInUser}
+       Welcome: {props.loggedInUser}
       </Button>
       <StyledMenu
         id="customized-menu"

@@ -67,12 +67,12 @@ class App extends Component {
            
           <Route
             path='/login'
-              render={(props) => <LoginForm {...props}  coco="pera" getUser={this.getTheUser} />}
+              render={(props) => <LoginForm {...props}   getUser={this.getTheUser} />}
            />
 
             <Route
               path='/dashboard'
-              render={(props) => <Dashboard {...props} coco="pera2" loggedInUser={this.state.loggedInUser} />}
+              render={(props) => <Dashboard {...props}  loggedInUser={this.state.loggedInUser} />}
              />
 
              <Route
@@ -82,7 +82,7 @@ class App extends Component {
          
              <Route
               path='/'
-              render={(props) => <Dashboard {...props} coco="pera2" loggedInUser={this.state.loggedInUser} />}
+              render={(props) => <Dashboard {...props}  loggedInUser={this.state.loggedInUser} />}
              />
 
 
@@ -101,7 +101,7 @@ class App extends Component {
 
           <Route
             path='/login'
-              render={(props) => <LoginForm {...props}  coco="pera" getUser={this.getTheUser} />}
+              render={(props) => <LoginForm {...props}   getUser={this.getTheUser} />}
            />
 
           <Route
@@ -111,12 +111,12 @@ class App extends Component {
           
           <Route
               path='/dashboard'
-              render={(props) => <Dashboard {...props} coco="pera2" loggedInUser={this.state.loggedInUser} />}
+              render={(props) => <Dashboard {...props}  loggedInUser={this.state.loggedInUser} />}
              />
 
            <Route
             path='/'
-              render={(props) => <LoginForm {...props}  coco="pera" getUser={this.getTheUser} />}
+              render={(props) => <LoginForm {...props}  getUser={this.getTheUser} />}
            />
 
           

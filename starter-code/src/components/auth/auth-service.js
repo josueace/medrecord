@@ -37,6 +37,55 @@ class AuthService {
     .then(response => response.data)
   }
 
+  postDoctor = (name,speciality, city,state,user) => {
+      
+    return this.service.post('/doctor', {name,speciality, city,state,user})
+    .then(response =>
+        
+        response.data
+        
+        )
+  }
+
+  delDoctor = (name,user) => {
+      
+    return this.service.post('/deldoctor', {name,user})
+    .then(response =>
+        
+        response.data
+        
+        )
+  }
+
+  postLab = (labdate,name, results) => {
+    return this.service.post('/lab', {labdate,name, results})
+    .then(response =>
+        response.data
+        )
+  }
+
+  delLab = (labdate,user) => {
+    return this.service.post('/dellab', {labdate,user})
+    .then(response =>
+        response.data
+        )
+  }
+
+  
+  postVisit = (visitdate,hospital, doctor,reason,diagnosis) => {
+    return this.service.post('/visit', {visitdate,hospital, doctor,reason,diagnosis})
+    .then(response =>
+        response.data
+        )
+  }
+
+  delVisit = (visitdate,user) => {
+    return this.service.post('/delvisit', {visitdate,user})
+    .then(response =>
+        response.data
+        )
+  }
+
 }
 
 export default AuthService;

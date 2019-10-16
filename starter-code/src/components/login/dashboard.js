@@ -16,7 +16,11 @@ import {  Redirect } from 'react-router'
 
 import Leftmenu from './leftmenu.js'
 import OpenCase from './opencase.js'
-import Visit from './visitlist.js'
+import Visit from './visit.js'
+import Hospital2  from './hospital2.js'
+import Doctor2  from './doctor2.js'
+import Lab  from './lab.js'
+
 import Menu from './menu.js'
 
 import logo from './fav.ico'
@@ -58,6 +62,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ResponsiveDrawer(props) {
+  
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -138,8 +143,26 @@ function ResponsiveDrawer(props) {
 
         <Switch>
           
-          <Route exact path='/dashboard/case' component={OpenCase}/>
-          <Route exact path='/dashboard/visit' component={Visit}/>
+        <Route
+              path='/dashboard/lab'
+              render={(props) => <Lab {...props}  myuser={props.loggedInUser} />}
+             />
+          
+          <Route
+              path='/dashboard/visit'
+              render={(props) => <Visit {...props}  myuser={props.loggedInUser} />}
+             />
+        
+
+        <Route
+              path='/dashboard/hospital'
+              render={(props) => <Hospital2 {...props}  myuser={props.loggedInUser} />}
+             />
+        
+          <Route
+              path='/dashboard/doctor'
+              render={(props) => <Doctor2 {...props}  myuser={props.loggedInUser} />}
+             />
 
         </Switch>
 
