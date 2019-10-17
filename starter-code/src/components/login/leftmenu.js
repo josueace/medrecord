@@ -32,7 +32,7 @@ const options=['/dashboard/visit','/dashboard/lab','/dashboard/visit','/dashboar
 
 export default function SelectedListItem(props) {
   
-  alert(' left '+JSON.stringify(props));
+ 
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
@@ -40,7 +40,7 @@ export default function SelectedListItem(props) {
   
     setSelectedIndex(index);
    
-    props.history.replace(options[index]);
+    props.history.push(options[index]);
   };
 
   const [open, setOpen] = React.useState(true);

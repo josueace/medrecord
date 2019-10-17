@@ -30,7 +30,7 @@ class Visit extends React.Component {
         
      axios
       .get(
-        "http://localhost:3001/visit/pedro"
+        "https://mymedrecord.herokuapp.com/visit/pedro"
       )
       .then(({ data }) => {
         

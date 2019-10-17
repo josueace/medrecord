@@ -10,7 +10,7 @@ import AuthService from '../auth/auth-service.js';
 class Doctor extends React.Component {
 
     constructor(props) {
-        alert('doct '+JSON.stringify(props));
+        alert('doct2 '+JSON.stringify(props));
         
         super(props);
        
@@ -31,7 +31,7 @@ class Doctor extends React.Component {
         
      axios
       .get(
-        "http://localhost:3001/doctor/pedro"
+        "https://mymedrecord.herokuapp.com/doctor/pedro"
       )
       .then(({ data }) => {
         

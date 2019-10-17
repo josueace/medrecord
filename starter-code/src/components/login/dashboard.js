@@ -62,10 +62,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ResponsiveDrawer(props) {
-
-  alert('dash2 '+JSON.stringify(props));
- 
-
   
   const { container } = props;
   const classes = useStyles();
@@ -149,27 +145,22 @@ function ResponsiveDrawer(props) {
           
         <Route
               path='/dashboard/lab'
-              render={(props) => <Lab {...props}  myuser={props.loggedInUser} />}
+              render={() => <Lab {...props}   />}
              />
           
           <Route
               path='/dashboard/visit'
-              render={(props) => <Visit {...props}  myuser={props.loggedInUser} />}
+              render={() => <Visit {...props}  />}
              />
-        
-
-        <Route
+ 
+         <Route
               path='/dashboard/hospital'
-              render={(props) => <Hospital2 {...props}  loggedInUser={props.loggedInUser} />}
+              render={() => <Hospital2 {...props}  />}
              />
         
           <Route
               path='/dashboard/doctor'
-              render=
-              {
-                 (container) => <Doctor2 {...props}   loggedInUser2={props.loggedInUser} coco={props.loggedInUser} />
-               
-             }
+              render= { () =>{return <Doctor2 {...props}  /> }}
              />
 
         </Switch>

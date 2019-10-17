@@ -25,7 +25,7 @@ class Hospital2 extends React.Component {
         
      axios
       .get(
-        "http://localhost:3001/hospital/pedro"
+        "https://mymedrecord.herokuapp.com/hospital/pedro"
       )
       .then(({ data }) => {
        
