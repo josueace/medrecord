@@ -13,6 +13,10 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Collapse from '@material-ui/core/Collapse';
 
+import { Switch, Route } from 'react-router-dom';
+import {  Redirect } from 'react-router'
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -27,14 +31,16 @@ const useStyles = makeStyles(theme => ({
 const options=['/dashboard/visit','/dashboard/lab','/dashboard/visit','/dashboard/hospital','/dashboard/hospital','/dashboard/doctor'];
 
 export default function SelectedListItem(props) {
+  
+  alert(' left '+JSON.stringify(props));
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleListItemClick = (event, index) => {
-   
+  
     setSelectedIndex(index);
-    
-    props.history.push(options[index]);
+   
+    props.history.replace(options[index]);
   };
 
   const [open, setOpen] = React.useState(true);

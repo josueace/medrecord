@@ -10,8 +10,10 @@ import AuthService from '../auth/auth-service.js';
 class Doctor extends React.Component {
 
     constructor(props) {
-        super(props);
+        alert('doct '+JSON.stringify(props));
         
+        super(props);
+       
         this.state = {
             columns: [
        { title: 'City',  field: 'city' },
