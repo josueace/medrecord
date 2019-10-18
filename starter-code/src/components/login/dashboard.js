@@ -20,6 +20,7 @@ import Visit from './visit.js'
 import Hospital2  from './hospital2.js'
 import Doctor2  from './doctor2.js'
 import Lab  from './lab.js'
+import Diagnosis  from './diagnosis.js'
 
 import Menu from './menu.js'
 
