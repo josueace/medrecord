@@ -24,7 +24,8 @@ import Diagnosis  from './diagnosis.js'
 
 import Menu from './menu.js'
 
-import logo from './fav.ico'
+
+import logo from '../../fav.ico'    //src    ..component  .. login
 
 
 

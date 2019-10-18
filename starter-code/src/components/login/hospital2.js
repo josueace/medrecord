@@ -28,7 +28,7 @@ class Hospital2 extends React.Component {
       .then( data => {
         this.setState({data});
           })
-      .catch( error =>{alert(error); console.log(error)} )
+      .catch( error =>{console.log(error)} )
   }
 
 
@@ -51,7 +51,7 @@ class Hospital2 extends React.Component {
               this.service.postHospital(newData.name, newData.phone,newData.city,newData.state,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{console.log(error)} )
 
 
             }, 600);
@@ -72,10 +72,12 @@ class Hospital2 extends React.Component {
               const data = [...this.state.data];
               data.splice(data.indexOf(oldData), 1);
               this.setState({ ...this.state, data });
+             
               this.service.delHospital(oldData.name,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
+                
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{console.log(error)} )
 
             }, 600);
           }),

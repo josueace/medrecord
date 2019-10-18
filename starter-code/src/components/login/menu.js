@@ -55,9 +55,9 @@ export default function CustomizedMenus(props) {//magic just putting props at ti
     service.logout()
         .then( response => {
            
-           props.history.push("/login");//check props here to see if it has function getuser
+           props.history.push("/login");
         })
-        .catch( error => {alert(error);console.log(error) })
+        .catch( error => {console.log(error) })
     
   };
 
@@ -68,15 +68,18 @@ export default function CustomizedMenus(props) {//magic just putting props at ti
  
   return (
     <div>
+
+      
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        color="warning"
         onClick={handleClick}
       >
        Welcome: {props.loggedInUser}
       </Button>
+    
+
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}

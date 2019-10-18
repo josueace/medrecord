@@ -31,7 +31,7 @@ class Visit extends React.Component {
               .then( data => {
                 this.setState({data});
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{console.log(error)} )
           }
 
   render() {
@@ -54,7 +54,7 @@ class Visit extends React.Component {
               this.service.postVisit(newData.visitdate, newData.hospital,newData.doctor,newData.reason,newData.diagnosis,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{ console.log(error)} )
 
             }, 600);
           }),
@@ -78,7 +78,7 @@ class Visit extends React.Component {
               this.service.delVisit(oldData.visitdate,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{ console.log(error)} )
 
             }, 600);
           }),

@@ -43,7 +43,9 @@ handleFormSubmit = (event) => {
       this.props.getUser(response.username);
       this.props.history.push("/dashboard");
   })
-  .catch( error =>{alert(error); console.log(error)} )
+  .catch( error =>{
+    this.setState({ errorMessage: error.response.data.message }); 
+    console.log(error)} )
       
     
   }
@@ -88,6 +90,13 @@ handleFormSubmit = (event) => {
      <div>
      <Edit field="confirmpassword"  handleChange={this.handleChange}/>
      </div>  
+
+     { this.state.errorMessage?
+         <div className="alert alert-danger">
+             <p>{this.state.errorMessage}</p>
+          </div>
+        :null
+     }
 
      <div>
      <button width="100%" type="button" onClick={this.handleFormSubmit} className="btn btn-primary btn-lg">Register</button>

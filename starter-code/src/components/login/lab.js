@@ -1,22 +1,17 @@
 import React from "react";
-
-import axios from 'axios';
-
 import MaterialTable from 'material-table';
-
 import AuthService from '../auth/auth-service.js';
-
+import SnackBar from '../util/snackbar.js';
 
 class Lab extends React.Component {
 
     constructor(props) {
         super(props);
-       
         this.state = {
             columns: [
-       { title: 'Lab Date',  field: 'labdate' },
-       { title: 'name', field: 'name' },
-       { title: 'results', field: 'results' }
+              { title: 'Lab Date',  field: 'labdate' },
+              { title: 'name', field: 'name' },
+              { title: 'results', field: 'results' }
           ],
         };
         this.service = new AuthService();
@@ -24,28 +19,26 @@ class Lab extends React.Component {
     }
 
     componentDidMount() {
+    
       this.service.listLabs(this.props.loggedInUser)
               .then( data => {
                 this.setState({data});
                   })
-              .catch( error =>{alert(error); console.log(error)} )
-  }
+              .catch( error =>{ console.log(error)} )
+          }
 
   render() {
 
   
  return (
 
-<div>
+  <div>
+  { this.state.errorMessage?
+    <SnackBar open="true" message={this.state.errorMessage}/>
+      :null
+   }
 
-{ this.state.errorMessage?
-         <div className="alert alert-danger">
-             <p>{this.state.errorMessage}</p>
-          </div>
-        :null
-     }
-
-   <MaterialTable
+    <MaterialTable
       title="Labs"
       columns={this.state.columns}
       data={this.state.data}
@@ -54,19 +47,19 @@ class Lab extends React.Component {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-               
+              const data = [...this.state.data];
               if (newData.name==null || newData.name.length<=0)
               {  
                 this.setState({errorMessage:"Name is required"});
-              } 
+              }
               else
               this.service.postLab(newData.labdate, newData.name,newData.results,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
-                     const data = [...this.state.data];
-                     this.setState({ ...this.state, data });
-                     data.push(newData);
+                data.push(newData);
+                this.setState({ ...this.state, data });
+        
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{ console.log(error)} )
 
             }, 600);
           }),
@@ -87,10 +80,10 @@ class Lab extends React.Component {
               data.splice(data.indexOf(oldData), 1);
               this.setState({ ...this.state, data });
 
-              this.service.delLab(oldData.labdate,this.props.loggedInUser)///make sure case match with field in html
+              this.service.delLab(oldData.name,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{ console.log(error)} )
 
             }, 600);
           }),

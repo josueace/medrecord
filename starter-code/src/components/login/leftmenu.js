@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const options=['/dashboard/visit','/dashboard/lab','/dashboard/diagnosis','/dashboard/hospital','/dashboard/hospital','/dashboard/doctor'];
+const options=['/dashboard/visit','/dashboard/lab','/dashboard/hospital','/dashboard/doctor'];
 
 export default function SelectedListItem(props) {
   
@@ -33,9 +33,7 @@ export default function SelectedListItem(props) {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleListItemClick = (event, index) => {
-  
     setSelectedIndex(index);
-   
     props.history.push(options[index]);
   };
 
@@ -71,16 +69,7 @@ export default function SelectedListItem(props) {
           <ListItemText primary="Labs" />
         </ListItem>
 
-        <ListItem
-          button
-          selected={selectedIndex === 2}
-          onClick={event => handleListItemClick(event, 2)}
-        >
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Diagnosis" />
-        </ListItem>
+      
 
       </List>
       <Divider />
@@ -88,7 +77,7 @@ export default function SelectedListItem(props) {
     
         <ListItem
           button
-          selected={selectedIndex === 3}
+          selected={selectedIndex === 5}
           onClick={handleClick}
         >
          
@@ -104,8 +93,8 @@ export default function SelectedListItem(props) {
         <List component="div" disablePadding>
 
           <ListItem button className={classes.nested}
-           selected={selectedIndex === 4}
-           onClick={event => handleListItemClick(event, 4)}
+           selected={selectedIndex === 2}
+           onClick={event => handleListItemClick(event, 2)}
            >
             <ListItemIcon>
               <StarBorder />
@@ -114,8 +103,8 @@ export default function SelectedListItem(props) {
           </ListItem>
 
           <ListItem button className={classes.nested}
-           selected={selectedIndex === 5}
-           onClick={event => handleListItemClick(event, 5)}
+           selected={selectedIndex === 3}
+           onClick={event => handleListItemClick(event, 3)}
          >
             <ListItemIcon>
               <StarBorder />

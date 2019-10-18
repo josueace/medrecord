@@ -22,6 +22,10 @@
   color: #61dafb;
 }
 
+.floatRight{
+  float:right;
+}
+
 
 .flex-container {
   display: flex;

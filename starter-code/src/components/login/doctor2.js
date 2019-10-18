@@ -24,7 +24,7 @@ class Doctor extends React.Component {
               .then( data => {
                 this.setState({data});
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{console.log(error)} )
           }
 
   render() {
@@ -46,7 +46,7 @@ class Doctor extends React.Component {
               this.service.postDoctor(newData.name, newData.speciality,newData.city,newData.state,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{ console.log(error)} )
 
             }, 600);
           }),
@@ -70,7 +70,7 @@ class Doctor extends React.Component {
               this.service.delDoctor(oldData.name,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
-              .catch( error =>{alert(error); console.log(error)} )
+              .catch( error =>{ console.log(error)} )
 
             }, 600);
           }),
