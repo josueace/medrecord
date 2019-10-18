@@ -5,7 +5,8 @@ import axios from 'axios';
 class AuthService {
   constructor() {
     let service = axios.create({
-      baseURL: 'https://mymedrecord.herokuapp.com',
+      baseURL: 'http://localhost:3001',
+ //     baseURL: 'https://mymedrecord.herokuapp.com',
       withCredentials: true
     });
     this.service = service;
@@ -37,13 +38,30 @@ class AuthService {
     .then(response => response.data)
   }
 
+  listDoctors= (user) => {
+    return this.service.get('/doctor/'+user)
+    .then(response => response.data)
+  }
+
+  listHospitals= (user) => {
+    return this.service.get('/hospital/'+user)
+    .then(response => response.data)
+  }
+  listVisits= (user) => {
+    return this.service.get('/visit/'+user)
+    .then(response => response.data)
+  }
+  listLabs= (user) => {
+    return this.service.get('/lab/'+user)
+    .then(response => response.data)
+  }
+
+
+
   postDoctor = (name,speciality, city,state,user) => {
-      
     return this.service.post('/doctor', {name,speciality, city,state,user})
     .then(response =>
-        
         response.data
-        
         )
   }
 
@@ -51,14 +69,29 @@ class AuthService {
       
     return this.service.post('/deldoctor', {name,user})
     .then(response =>
-        
         response.data
-        
         )
   }
 
-  postLab = (labdate,name, results) => {
-    return this.service.post('/lab', {labdate,name, results})
+  postHospital = (name,phone, city,state,user) => {
+      
+    return this.service.post('/hospital', {name,phone, city,state,user})
+    .then(response =>
+        response.data
+        )
+  }
+
+  delHospital = (name,user) => {
+      
+    return this.service.post('/delhospital', {name,user})
+    .then(response =>
+        response.data
+        )
+  }
+
+
+  postLab = (labdate,name, results,user) => {
+    return this.service.post('/lab', {labdate,name, results,user})
     .then(response =>
         response.data
         )
@@ -72,8 +105,8 @@ class AuthService {
   }
 
   
-  postVisit = (visitdate,hospital, doctor,reason,diagnosis) => {
-    return this.service.post('/visit', {visitdate,hospital, doctor,reason,diagnosis})
+  postVisit = (visitdate,hospital, doctor, reason,diagnosis,user) => {
+    return this.service.post('/visit', {visitdate, hospital, doctor,reason,diagnosis,user})
     .then(response =>
         response.data
         )

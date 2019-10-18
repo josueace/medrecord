@@ -27,19 +27,21 @@ const myedit = (props) => {
       }));
 
     const classes = useStyles();
-
-    const [values, setValues] = React.useState({//useState hook.. returns values and setvalues to update it
-      amount: '',
-      password: '',
-      weight: '',
-      weightRange: '',
-      showPassword: false,
-    });
   
-    const handleChange = prop => event => {
+  /*
+   need to digest this way
+
+   const [values, setValues] = React.useState({//useState hook.. returns values and setvalues to update it
+      field1: '',
+      field2: ''
+    });
+
+  const handleChange = prop => event => {
         alert(JSON.stringify(values));
       setValues({ ...values, [prop]: event.target.value });
     };
+   */
+
 
    /* 
    const  handleChange2 = (e) => {
@@ -47,7 +49,8 @@ const myedit = (props) => {
       }
 */
 
-const handleChange2 =  e => {//way to send paremeter and also target
+// parent form of this edit should have handleChange  <Edit  handleChange=
+const handleChange2 =  e => {//way to send paremeter and also target// but notice i dont set props
     props.handleChange(e.target.value,e.target.id);//good lifting up
 };
 
@@ -58,7 +61,6 @@ const handleChange2 =  e => {//way to send paremeter and also target
         className={clsx(classes.margin, classes.textField)}
         variant="outlined"
         label={props.field}
-        value={values.username}
         onChange={handleChange2}
         
         InputProps={{

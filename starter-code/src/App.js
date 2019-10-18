@@ -6,12 +6,8 @@ import Register from './components/login/register.js'
 import Dashboard from './components/login/dashboard.js'
 
 import AuthService from './components/auth/auth-service';
-
-import axios from 'axios';
-
-
 import { Switch, Route } from 'react-router-dom';
-import {  Redirect } from 'react-router'
+
 
 
 class App extends Component {

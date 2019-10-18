@@ -1,6 +1,6 @@
 import React from "react";
 
-import axios from 'axios';
+
 
 import MaterialTable from 'material-table';
 
@@ -17,7 +17,7 @@ class Visit extends React.Component {
        { title: 'Visit Date',  field: 'visitdate' },
        { title: 'Hospital', field: 'hospital' },
        { title: 'Doctor', field: 'doctor' },
-       { title: 'Reazon', field: 'reazon' },
+       { title: 'reason', field: 'reazon' },
        { title: 'Diagnosis', field: 'diagnosis' }
           ],
         };
@@ -27,17 +27,12 @@ class Visit extends React.Component {
 
     componentDidMount() {
        
-        
-     axios
-      .get(
-        "https://mymedrecord.herokuapp.com/visit/pedro"
-      )
-      .then(({ data }) => {
-        
-        this.setState({data});
-      });
-        
-      }
+      this.service.listVisits(this.props.loggedInUser)
+              .then( data => {
+                this.setState({data});
+                  })
+              .catch( error =>{alert(error); console.log(error)} )
+          }
 
   render() {
 
@@ -56,7 +51,7 @@ class Visit extends React.Component {
               data.push(newData);
               this.setState({ ...this.state, data });
 
-              this.service.postVisit(newData.visitdate, newData.hospital,newData.doctor,newData.reazon,newData.diagnosis,"pedro")///make sure case match with field in html
+              this.service.postVisit(newData.visitdate, newData.hospital,newData.doctor,newData.reason,newData.diagnosis,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
               .catch( error =>{alert(error); console.log(error)} )
@@ -80,7 +75,7 @@ class Visit extends React.Component {
               data.splice(data.indexOf(oldData), 1);
               this.setState({ ...this.state, data });
 
-              this.service.delVisit(oldData.visitdate,"pedro")///make sure case match with field in html
+              this.service.delVisit(oldData.visitdate,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
               .catch( error =>{alert(error); console.log(error)} )

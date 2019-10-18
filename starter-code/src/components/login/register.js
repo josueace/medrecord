@@ -59,7 +59,7 @@ handleFormSubmit = (event) => {
   <div style={{flexGrow: 4}} className='leftcontext'>
    
   <br></br>
-  <img src="fav.ico"  height="200" width="200"></img>
+  <img src="fav.ico" alt="logo" height="200" width="200"></img>
   <h1>Welcome to medrecord</h1>
   <h3>Keep track of your health</h3>
 

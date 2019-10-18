@@ -8,14 +8,14 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { Switch, Route } from 'react-router-dom';
-import {  Redirect } from 'react-router'
+
 
 import Leftmenu from './leftmenu.js'
-import OpenCase from './opencase.js'
+
 import Visit from './visit.js'
 import Hospital2  from './hospital2.js'
 import Doctor2  from './doctor2.js'
@@ -76,7 +76,7 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <img src={logo}  height="75" width="75"></img>
+      <img src={logo} alt="logo" height="75" width="75"></img>
       <div className={classes.toolbar} />
       
       
@@ -151,6 +151,11 @@ function ResponsiveDrawer(props) {
           <Route
               path='/dashboard/visit'
               render={() => <Visit {...props}  />}
+             />
+               
+          <Route
+              path='/dashboard/diagnosis'
+              render={() => <Diagnosis {...props}  />}
              />
  
          <Route

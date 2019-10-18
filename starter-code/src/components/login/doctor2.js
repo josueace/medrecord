@@ -1,19 +1,11 @@
 import React from "react";
-
-import axios from 'axios';
-
 import MaterialTable from 'material-table';
-
 import AuthService from '../auth/auth-service.js';
-
 
 class Doctor extends React.Component {
 
     constructor(props) {
-        alert('doct2 '+JSON.stringify(props));
-        
         super(props);
-       
         this.state = {
             columns: [
        { title: 'City',  field: 'city' },
@@ -27,18 +19,13 @@ class Doctor extends React.Component {
     }
 
     componentDidMount() {
-      
-        
-     axios
-      .get(
-        "https://mymedrecord.herokuapp.com/doctor/pedro"
-      )
-      .then(({ data }) => {
-        
-        this.setState({data});
-      });
-        
-      }
+    
+      this.service.listDoctors(this.props.loggedInUser)
+              .then( data => {
+                this.setState({data});
+                  })
+              .catch( error =>{alert(error); console.log(error)} )
+          }
 
   render() {
 
@@ -56,10 +43,7 @@ class Doctor extends React.Component {
               const data = [...this.state.data];
               data.push(newData);
               this.setState({ ...this.state, data });
-
-             
-
-              this.service.postDoctor(newData.name, newData.speciality,newData.city,newData.state,"pedro")///make sure case match with field in html
+              this.service.postDoctor(newData.name, newData.speciality,newData.city,newData.state,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
               .catch( error =>{alert(error); console.log(error)} )
@@ -83,7 +67,7 @@ class Doctor extends React.Component {
               data.splice(data.indexOf(oldData), 1);
               this.setState({ ...this.state, data });
 
-              this.service.delDoctor(oldData.name,"pedro")///make sure case match with field in html
+              this.service.delDoctor(oldData.name,this.props.loggedInUser)///make sure case match with field in html
               .then( response => {
                   })
               .catch( error =>{alert(error); console.log(error)} )

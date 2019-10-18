@@ -1,8 +1,7 @@
 import React from "react";
-
-import axios from 'axios';
-
 import MaterialTable from 'material-table';
+
+import AuthService from '../auth/auth-service.js';// import source file
 
 
 
@@ -18,21 +17,20 @@ class Hospital2 extends React.Component {
        { title: 'Phone', field: 'phone' }
           ],
         };
+        this.service = new AuthService();
+
 
     }
 
     componentDidMount() {
         
-     axios
-      .get(
-        "https://mymedrecord.herokuapp.com/hospital/pedro"
-      )
-      .then(({ data }) => {
-       
+      this.service.listHospitals(this.props.loggedInUser)
+      .then( data => {
         this.setState({data});
-      });
-        
-      }
+          })
+      .catch( error =>{alert(error); console.log(error)} )
+  }
+
 
   render() {
 
@@ -50,6 +48,12 @@ class Hospital2 extends React.Component {
               const data = [...this.state.data];
               data.push(newData);
               this.setState({ ...this.state, data });
+              this.service.postHospital(newData.name, newData.phone,newData.city,newData.state,this.props.loggedInUser)///make sure case match with field in html
+              .then( response => {
+                  })
+              .catch( error =>{alert(error); console.log(error)} )
+
+
             }, 600);
           }),
         onRowUpdate: (newData, oldData) =>
@@ -68,6 +72,11 @@ class Hospital2 extends React.Component {
               const data = [...this.state.data];
               data.splice(data.indexOf(oldData), 1);
               this.setState({ ...this.state, data });
+              this.service.delHospital(oldData.name,this.props.loggedInUser)///make sure case match with field in html
+              .then( response => {
+                  })
+              .catch( error =>{alert(error); console.log(error)} )
+
             }, 600);
           }),
       }}

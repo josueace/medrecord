@@ -13,10 +13,6 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Collapse from '@material-ui/core/Collapse';
 
-import { Switch, Route } from 'react-router-dom';
-import {  Redirect } from 'react-router'
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -28,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const options=['/dashboard/visit','/dashboard/lab','/dashboard/visit','/dashboard/hospital','/dashboard/hospital','/dashboard/doctor'];
+const options=['/dashboard/visit','/dashboard/lab','/dashboard/diagnosis','/dashboard/hospital','/dashboard/hospital','/dashboard/doctor'];
 
 export default function SelectedListItem(props) {
   

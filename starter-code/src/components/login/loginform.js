@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Edit from '../myedit.js'
 
 import AuthService from '../auth/auth-service.js';
-import {  Redirect } from 'react-router'
+
 
 class LoginForm extends Component {
 
@@ -38,16 +38,19 @@ class LoginForm extends Component {
         
         this.service.login(username, password)
         .then( response => {
-        
-           
            this.setState({ username: response.username, password: "" });// this will cause render
            this.props.getUser(response.username);
            this.props.history.push("/dashboard");
           
         })
-        .catch( error => {alert(error);console.log(error) })
+        .catch( error => {
+           this.setState({ errorMessage: error.response.data.message });
+           console.log(error) 
+            }
+          )
       }
 
+//https://react-cn.github.io/react/tips/if-else-in-JSX.html
 
   render() {
     
@@ -59,7 +62,7 @@ class LoginForm extends Component {
   <div style={{flexGrow: 4}} className='leftcontext'>
    
   <br></br>
-  <img src="fav.ico"  height="200" width="200"></img>
+  <img src="fav.ico" alt="logo" height="200" width="200"></img>
   <h1>Welcome to medrecord</h1>
   <h3>Keep track of your health</h3>
 
@@ -83,8 +86,14 @@ class LoginForm extends Component {
      <Edit field="password"  handleChange={this.handleChange}/>
      </div>  
 
+     { this.state.errorMessage?
+         <div className="alert alert-danger">
+             <p>{this.state.errorMessage}</p>
+          </div>
+        :null
+     }
+
      <div>
-     
      <button width="100%" type="submit"  className="btn btn-primary btn-lg">LOGIN</button>
      </div>  
 
